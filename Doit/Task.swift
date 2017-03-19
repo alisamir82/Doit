@@ -9,8 +9,6 @@
 class Task {
     
     var taskName = ""
-    var taskDate = ""
-    var taskDetails = ""
     var taskImportant : Bool = false
     
 }

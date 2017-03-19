@@ -19,8 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		414AC40B1E7D7A7C00ADA560 /* TaskPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskPageViewController.swift; sourceTree = "<group>"; };
-		414AC40D1E7D7A8900ADA560 /* TaskAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAddViewController.swift; sourceTree = "<group>"; };
+		414AC40B1E7D7A7C00ADA560 /* TaskPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskPageViewController.swift; path = ../TaskPageViewController.swift; sourceTree = "<group>"; };
+		414AC40D1E7D7A8900ADA560 /* TaskAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskAddViewController.swift; path = ../TaskAddViewController.swift; sourceTree = "<group>"; };
 		414AC40F1E7D7EB100ADA560 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		41EA1DA21E7D78B600E494EA /* Doit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Doit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EA1DA51E7D78B600E494EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,8 +46,6 @@
 		41EA1D991E7D78B600E494EA = {
 			isa = PBXGroup;
 			children = (
-				414AC40B1E7D7A7C00ADA560 /* TaskPageViewController.swift */,
-				414AC40D1E7D7A8900ADA560 /* TaskAddViewController.swift */,
 				41EA1DA41E7D78B600E494EA /* Doit */,
 				41EA1DA31E7D78B600E494EA /* Products */,
 			);
@@ -66,6 +64,8 @@
 			children = (
 				41EA1DA51E7D78B600E494EA /* AppDelegate.swift */,
 				41EA1DA71E7D78B600E494EA /* ViewController.swift */,
+				414AC40D1E7D7A8900ADA560 /* TaskAddViewController.swift */,
+				414AC40B1E7D7A7C00ADA560 /* TaskPageViewController.swift */,
 				41EA1DA91E7D78B600E494EA /* Main.storyboard */,
 				414AC40F1E7D7EB100ADA560 /* Task.swift */,
 				41EA1DAF1E7D78B600E494EA /* Assets.xcassets */,

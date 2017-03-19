@@ -22,14 +22,12 @@ class TaskPageViewController: UIViewController {
         super.viewDidLoad()
 
         if task.taskImportant {
-            task.taskName = "!" + task.taskName
+            taskTitleLabel.text = "❗️\(task.taskName)"
+        }else{
+            taskTitleLabel.text = task.taskName
         }
         
-        taskTitleLabel.text = task.taskName
-        taskDescriptionLabel.text = task.taskDetails
-        taskDateLabel.text = task.taskDate
         
-       
         
     }
 
