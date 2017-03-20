@@ -9,55 +9,54 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var tasks : [Task] = []
+    var selectedIndex = 0
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         
         self.tasks = makeTasks()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+    }
     
-    }
-
-    @IBAction func addTaskButton(_ sender: Any) {
-         self.performSegue(withIdentifier: "addSegue", sender: nil)
-    }
-   
- 
-  
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        self.selectedIndex = indexPath.row
         let task = self.tasks[indexPath.row]
-        
-   //     self.performSegue(withIdentifier: "viewSegue", sender: task)
+        self.performSegue(withIdentifier: "viewSegue", sender: task)
         
     }
-   
+    
+    @IBAction func addTaskButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "addSegue", sender: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let nextVC = segue.destination as! TaskAddViewController;()
+        if segue.identifier == "viewSegue"{
+            let nextVC = segue.destination as! TaskPageViewController
+            nextVC.task = sender as! Task
+            nextVC.previousVC = self
+        }
         
-        nextVC.previousVC = self
- 
+        if segue.identifier == "addSegue"{
+            let nextVC = segue.destination as! TaskAddViewController
+            nextVC.previousVC = self
+        }
+        
     }
-   
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-        let cell = UITableViewCell()
         
+        let cell = UITableViewCell()
         let task = self.tasks[indexPath.row]
         
         if task.taskImportant {
@@ -88,7 +87,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         task3.taskName = "buy eggs"
         task3.taskImportant = true
         
-       return [task1,task2,task3]
+        return [task1,task2,task3]
         
         
     }

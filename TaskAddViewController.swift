@@ -10,11 +10,22 @@ import UIKit
 
 class TaskAddViewController: UIViewController {
 
+    var previousVC = ViewController()
+    
+    
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var taskImportant: UISwitch!
     
-    var previousVC = ViewController()
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+  
+        }
+        
+        
+   
     
     
     @IBAction func addButton(_ sender: Any) {
@@ -24,6 +35,7 @@ class TaskAddViewController: UIViewController {
         task.taskImportant = taskImportant.isOn
         
         previousVC.tasks.append(task)
+        
         previousVC.tableView.reloadData()
         navigationController!.popViewController(animated: true)
         

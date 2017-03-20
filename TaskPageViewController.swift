@@ -8,15 +8,16 @@
 
 import UIKit
 
-class TaskPageViewController: UIViewController {
+    class TaskPageViewController: UIViewController {
 
+    var previousVC = ViewController()
+    
     var task = Task()
     
     
-    @IBOutlet weak var taskTitleLabel: UILabel!
-    @IBOutlet weak var taskDescriptionLabel: UILabel!
-    @IBOutlet weak var taskDateLabel: UILabel!
-    
+
+     @IBOutlet weak var taskTitleLabel: UILabel!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,20 +32,18 @@ class TaskPageViewController: UIViewController {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+        @IBAction func buttonTapped(_ sender: Any) {
+            
+            previousVC.tasks.remove(at: previousVC.selectedIndex)
+            previousVC.tableView.reloadData()
+            navigationController!.popViewController(animated: true)
+        }
+   
+           
+            
+            
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+
 
 }
