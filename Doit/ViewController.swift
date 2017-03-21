@@ -13,22 +13,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     
     var tasks : [Task] = []
-    var selectedIndex = 0
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        self.tasks = makeTasks()
         
         tableView.delegate = self
         tableView.dataSource = self
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getTasks()
+        tableView.reloadData()
+        
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.selectedIndex = indexPath.row
+    
         let task = self.tasks[indexPath.row]
         self.performSegue(withIdentifier: "viewSegue", sender: task)
         
@@ -42,17 +45,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if segue.identifier == "viewSegue"{
             let nextVC = segue.destination as! TaskPageViewController
-            nextVC.task = sender as! Task
-            nextVC.previousVC = self
-        }
-        
-        if segue.identifier == "addSegue"{
-            let nextVC = segue.destination as! TaskAddViewController
-            nextVC.previousVC = self
+            nextVC.task = sender as? Task
+  
         }
         
     }
     
+    
+    func getTasks()
+    {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        
+        //error handling standard with fetch command
+        do{
+            tasks = try context.fetch(Task.fetchRequest()) as [Task]
+            print(tasks)
+        } catch{
+        print("there is an issue")
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -60,9 +73,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let task = self.tasks[indexPath.row]
         
         if task.taskImportant {
-            cell.textLabel?.text = "❗️ \(task.taskName)"
+            cell.textLabel?.text = "❗️ \(task.taskName!)"
         }else{
-            cell.textLabel?.text = task.taskName
+            cell.textLabel?.text = task.taskName!
         }
         
         return cell
@@ -72,25 +85,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return tasks.count
     }
     
-    func makeTasks() -> [Task]{
-        
-        
-        let task1 = Task()
-        task1.taskName = "Pick the kids"
-        task1.taskImportant = true
-        
-        let task2 = Task()
-        task2.taskName = "parent meeting"
-        task2.taskImportant = false
-        
-        let task3 = Task()
-        task3.taskName = "buy eggs"
-        task3.taskImportant = true
-        
-        return [task1,task2,task3]
-        
-        
-    }
     
 }
 

@@ -8,42 +8,45 @@
 
 import UIKit
 
-    class TaskPageViewController: UIViewController {
-
-    var previousVC = ViewController()
+class TaskPageViewController: UIViewController {
     
-    var task = Task()
+    var task : Task? = nil
     
     
-
-     @IBOutlet weak var taskTitleLabel: UILabel!
-   
+    
+    @IBOutlet weak var taskTitleLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if task.taskImportant {
-            taskTitleLabel.text = "❗️\(task.taskName)"
+        
+        if task!.taskImportant {
+            taskTitleLabel.text = "❗️\(task!.taskName!)"
         }else{
-            taskTitleLabel.text = task.taskName
+            taskTitleLabel.text = task!.taskName!
         }
         
         
         
     }
-
-        @IBAction func buttonTapped(_ sender: Any) {
-            
-            previousVC.tasks.remove(at: previousVC.selectedIndex)
-            previousVC.tableView.reloadData()
-            navigationController!.popViewController(animated: true)
-        }
-   
-           
-            
-            
-
-
-
-
+    
+    @IBAction func buttonTapped(_ sender: Any) {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        navigationController!.popViewController(animated: true)
+        
+        context.delete((task!))
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }
